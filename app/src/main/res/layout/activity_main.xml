@@ -10,7 +10,7 @@
     <LinearLayout
         android:id="@+id/tabBarContainer"
         android:layout_width="0dp"
-        android:layout_height="30dp"
+        android:layout_height="44dp"
         android:orientation="horizontal"
         android:background="?attr/colorSurfaceVariant"
         android:baselineAligned="false"
@@ -24,29 +24,32 @@
             android:layout_height="match_parent"
             android:orientation="horizontal"
             android:gravity="center_vertical"
-            android:minWidth="80dp"
+            android:minWidth="152dp"
             >
             <TextView
                 android:id="@+id/homeBtn"
-                android:layout_width="40dp"
-                android:layout_height="32dp"
+                android:layout_width="48dp"
+                android:layout_height="match_parent"
                 android:text="主页"
+                android:textSize="18sp"
                 android:gravity="center"
                 android:layout_marginStart="8dp"
                 tools:ignore="HardcodedText" />
             <TextView
                 android:id="@+id/reload"
-                android:layout_width="40dp"
-                android:layout_height="32dp"
+                android:layout_width="48dp"
+                android:layout_height="match_parent"
                 android:gravity="center"
                 android:text="刷新"
+                android:textSize="18sp"
                 tools:ignore="HardcodedText" />
             <TextView
                 android:id="@+id/quit"
-                android:layout_width="40dp"
-                android:layout_height="32dp"
+                android:layout_width="48dp"
+                android:layout_height="match_parent"
                 android:gravity="center"
                 android:text="退出"
+                android:textSize="18sp"
                 tools:ignore="HardcodedText" />
         </LinearLayout>
 
