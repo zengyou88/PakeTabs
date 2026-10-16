@@ -9,7 +9,7 @@ import android.view.MenuItem
 import android.view.View
 import android.view.WindowManager
 import android.widget.EditText
-import android.widget.ImageButton
+import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -54,6 +54,18 @@ class MainActivity : AppCompatActivity(), BrowserTabFragment.TabHost {
 
         // 设置主页按钮和刷新按钮的点击事件
         setupToolbarButtons()
+
+        tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+            override fun onTabSelected(tab: TabLayout.Tab) {
+                refreshTabDividers()
+            }
+
+            override fun onTabUnselected(tab: TabLayout.Tab) {
+                refreshTabDividers()
+            }
+
+            override fun onTabReselected(tab: TabLayout.Tab) = Unit
+        })
 
         tabMediator = TabLayoutMediator(tabLayout, viewPager) { tab, position ->
             tab.customView = createTabView(tab, position)
@@ -167,6 +179,7 @@ class MainActivity : AppCompatActivity(), BrowserTabFragment.TabHost {
         tabs.add(newTab)
         tabsAdapter.notifyItemInserted(tabs.lastIndex)
         viewPager.setCurrentItem(tabs.lastIndex, false)
+        tabLayout.post { refreshTabDividers() }
     }
 
     private fun closeTab(position: Int) {
@@ -178,6 +191,19 @@ class MainActivity : AppCompatActivity(), BrowserTabFragment.TabHost {
         } else {
             val nextIndex = position.coerceAtMost(tabs.lastIndex)
             viewPager.setCurrentItem(nextIndex, false)
+        }
+        tabLayout.post { refreshTabDividers() }
+    }
+
+    private fun refreshTabDividers() {
+        val count = tabLayout.tabCount
+        for (i in 0 until count) {
+            val divider = tabLayout.getTabAt(i)?.customView?.findViewById<View>(R.id.tabDivider)
+                ?: continue
+            val hide = tabLayout.getTabAt(i)?.isSelected == true ||
+                tabLayout.getTabAt(i + 1)?.isSelected == true ||
+                i == count - 1
+            divider.visibility = if (hide) View.GONE else View.VISIBLE
         }
     }
 
@@ -191,9 +217,14 @@ class MainActivity : AppCompatActivity(), BrowserTabFragment.TabHost {
      * 设置工具栏按钮（主页和刷新）的点击事件
      */
     private fun setupToolbarButtons() {
+        val backBtn = findViewById<TextView>(R.id.backBtn)
         val homeBtn = findViewById<TextView>(R.id.homeBtn)
         val reloadBtn = findViewById<TextView>(R.id.reload)
         val quitBtn = findViewById<TextView>(R.id.quit)
+
+        backBtn.setOnClickListener {
+            getCurrentFragment()?.goBack()
+        }
 
         // 主页按钮：加载默认URL
         homeBtn.setOnClickListener {
@@ -221,9 +252,13 @@ class MainActivity : AppCompatActivity(), BrowserTabFragment.TabHost {
     }
 
     private fun createTabView(tab: TabLayout.Tab, position: Int): View {
-        val view = LayoutInflater.from(this).inflate(R.layout.view_tab, null)
+        val view = LayoutInflater.from(this).inflate(R.layout.view_tab, tabLayout, false)
+        view.layoutParams = LinearLayout.LayoutParams(
+            resources.getDimensionPixelSize(R.dimen.chrome_tab_width),
+            resources.getDimensionPixelSize(R.dimen.chrome_tab_height)
+        )
         val titleView = view.findViewById<TextView>(R.id.tabTitle)
-        val closeButton = view.findViewById<ImageButton>(R.id.tabClose)
+        val closeButton = view.findViewById<TextView>(R.id.tabClose)
         titleView.text = tabs[position].title
         // 关闭标签页
         if(position == 0) {

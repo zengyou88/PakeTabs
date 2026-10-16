@@ -14,7 +14,8 @@
     "author": "",
     "type": "commonjs",
     "scripts": {
-        "worker:pp": "node scripts/ppworker.cjs"
+        "worker:pp": "node scripts/ppworker.cjs",
+        "android:phone": "./gradlew installDebug"
     },
     "dependencies": {
         "commander": "^13.1.0",

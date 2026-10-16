@@ -10,70 +10,83 @@
     <LinearLayout
         android:id="@+id/tabBarContainer"
         android:layout_width="0dp"
-        android:layout_height="44dp"
-        android:orientation="horizontal"
-        android:background="?attr/colorSurfaceVariant"
+        android:layout_height="48dp"
+        android:background="@color/chrome_strip"
         android:baselineAligned="false"
-        app:layout_constraintTop_toTopOf="parent"
+        android:gravity="bottom"
+        android:orientation="horizontal"
+        android:paddingStart="4dp"
+        android:paddingEnd="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        >
+        app:layout_constraintTop_toTopOf="parent">
+
         <LinearLayout
             android:id="@+id/tools"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:orientation="horizontal"
+            android:layout_height="38dp"
             android:gravity="center_vertical"
-            android:minWidth="152dp"
-            >
+            android:orientation="horizontal"
+            android:paddingEnd="6dp">
+
+            <TextView
+                android:id="@+id/backBtn"
+                style="@style/ChromeToolbarButton"
+                android:drawableStart="@drawable/ic_nav_back"
+                android:text="返回"
+                tools:ignore="HardcodedText" />
+
             <TextView
                 android:id="@+id/homeBtn"
-                android:layout_width="48dp"
-                android:layout_height="match_parent"
+                style="@style/ChromeToolbarButton"
+                android:drawableStart="@drawable/ic_nav_home"
                 android:text="主页"
-                android:textSize="18sp"
-                android:gravity="center"
-                android:layout_marginStart="8dp"
                 tools:ignore="HardcodedText" />
+
             <TextView
                 android:id="@+id/reload"
-                android:layout_width="48dp"
-                android:layout_height="match_parent"
-                android:gravity="center"
+                style="@style/ChromeToolbarButton"
+                android:drawableStart="@drawable/ic_nav_reload"
                 android:text="刷新"
-                android:textSize="18sp"
                 tools:ignore="HardcodedText" />
+
             <TextView
                 android:id="@+id/quit"
-                android:layout_width="48dp"
-                android:layout_height="match_parent"
-                android:gravity="center"
+                style="@style/ChromeToolbarButton.Exit"
+                android:drawableStart="@drawable/ic_nav_exit"
                 android:text="退出"
-                android:textSize="18sp"
                 tools:ignore="HardcodedText" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="6dp"
+                android:background="@color/chrome_toolbar_border" />
         </LinearLayout>
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tabLayout"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_height="38dp"
             android:layout_weight="1"
+            android:background="@color/chrome_strip"
+            app:tabBackground="@android:color/transparent"
+            app:tabContentStart="0dp"
             app:tabGravity="start"
-            android:background="?attr/colorSurfaceVariant"
-            app:tabIndicatorColor="@color/cardview_dark_background"
+            app:tabIndicatorHeight="0dp"
+            app:tabMinWidth="0dp"
+            app:tabMode="scrollable"
             app:tabPaddingEnd="0dp"
             app:tabPaddingStart="0dp"
-            app:tabContentStart="0dp"
-            app:tabIndicatorGravity="center"
-            app:tabIndicatorHeight="0dp"
-            tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck"
-            app:tabMode="scrollable" />
+            app:tabRippleColor="@android:color/transparent"
+            tools:ignore="SpeakableTextPresentCheck" />
     </LinearLayout>
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/viewPager"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:background="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

@@ -2,4 +2,14 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="chrome_strip">#DEE1E6</color>
+    <color name="chrome_tab">#FFFFFF</color>
+    <color name="chrome_tab_hover">#CFD3D9</color>
+    <color name="chrome_text">#202124</color>
+    <color name="chrome_muted">#5F6368</color>
+    <color name="chrome_tab_divider">#AEB3BA</color>
+    <color name="chrome_toolbar_border">#C4C7CE</color>
+    <color name="chrome_exit">#C5221F</color>
+    <color name="chrome_exit_pressed">#FCE8E6</color>
+    <color name="chrome_close_pressed">#DADCE0</color>
 </resources>

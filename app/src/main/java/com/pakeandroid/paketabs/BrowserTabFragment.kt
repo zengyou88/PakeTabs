@@ -125,6 +125,16 @@ class BrowserTabFragment : Fragment() {
         webView?.reload()
     }
 
+    /**
+     * 返回上一页
+     */
+    fun goBack() {
+        val target = webView ?: return
+        if (target.canGoBack()) {
+            target.goBack()
+        }
+    }
+
     companion object {
         private const val ARG_TAB_ID = "tab_id"
         private const val ARG_INITIAL_URL = "initial_url"
